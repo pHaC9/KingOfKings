@@ -48,14 +48,12 @@ public class TurnIndicator : MonoBehaviour
         {
             animator.SetInteger("TurnChange", 1);
             blueTurn = false;
-            Debug.Log("blueTurn = false");
             GetComponent<Renderer>().material.color = Color.red;
         }
         else
         {
             animator.SetInteger("TurnChange", 2);
             blueTurn = true;
-            Debug.Log("blueTurn = true");
             GetComponent<Renderer>().material.color = Color.blue; ;
         }
     }

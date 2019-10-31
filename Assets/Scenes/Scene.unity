@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 227505835}
   - component: {fileID: 227505836}
   m_Layer: 0
-  m_Name: Carta
+  m_Name: CartaAXZ_P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1865858326dd7c148bc276efdd279107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleMoves: ffffffff01000000fbffffff05000000
+  possibleMovesX: feffffff02000000ffffffff01000000
+  possibleMovesY: 0100000001000000ffffffffffffffff
 --- !u!1 &298543239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1146,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 0
+--- !u!1 &537458831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537458833}
+  - component: {fileID: 537458832}
+  m_Layer: 0
+  m_Name: CartaAXZ_P2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &537458832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537458831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1865858326dd7c148bc276efdd279107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleMovesX: feffffff02000000ffffffff01000000
+  possibleMovesY: 0100000001000000ffffffffffffffff
+--- !u!4 &537458833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537458831}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &575671196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,10 +2422,10 @@ MonoBehaviour:
   blueTurn: 1
   cameraPivot: {fileID: 869718045}
   animator: {fileID: 869718047}
-  turnID1: {fileID: 0}
-  turnID2: {fileID: 0}
-  turnID3: {fileID: 0}
-  turnID4: {fileID: 0}
+  turnID1: {fileID: 1270389234}
+  turnID2: {fileID: 1303305314}
+  turnID3: {fileID: 1605443074}
+  turnID4: {fileID: 1736726701}
 --- !u!65 &1303305317
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3230,10 +3276,10 @@ MonoBehaviour:
   blueTurn: 0
   cameraPivot: {fileID: 869718045}
   animator: {fileID: 869718047}
-  turnID1: {fileID: 0}
-  turnID2: {fileID: 0}
-  turnID3: {fileID: 0}
-  turnID4: {fileID: 0}
+  turnID1: {fileID: 1270389234}
+  turnID2: {fileID: 1303305314}
+  turnID3: {fileID: 1605443074}
+  turnID4: {fileID: 1736726701}
 --- !u!65 &1605443077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3574,10 +3620,10 @@ MonoBehaviour:
   blueTurn: 0
   cameraPivot: {fileID: 869718045}
   animator: {fileID: 869718047}
-  turnID1: {fileID: 0}
-  turnID2: {fileID: 0}
-  turnID3: {fileID: 0}
-  turnID4: {fileID: 0}
+  turnID1: {fileID: 1270389234}
+  turnID2: {fileID: 1303305314}
+  turnID3: {fileID: 1605443074}
+  turnID4: {fileID: 1736726701}
 --- !u!65 &1736726704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3878,30 +3924,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99fde1ac85b3504e91a36c24f935563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertical: 5
-  horizontal: 5
-  currentTile: 0
-  Casas:
+  tempoAnimacao: 0.6
+  currentTile: 
+  Linha1:
   - {fileID: 2123211357}
   - {fileID: 1584383525}
   - {fileID: 575671196}
   - {fileID: 415502407}
   - {fileID: 968209121}
+  Linha2:
   - {fileID: 73963756}
   - {fileID: 1553285413}
   - {fileID: 1783035755}
   - {fileID: 840133741}
   - {fileID: 1751621200}
+  Linha3:
   - {fileID: 843898172}
   - {fileID: 2033463174}
   - {fileID: 1332025058}
   - {fileID: 626208728}
   - {fileID: 1575365958}
+  Linha4:
   - {fileID: 913175697}
   - {fileID: 1418577383}
   - {fileID: 300181301}
   - {fileID: 1679059966}
   - {fileID: 393634648}
+  Linha5:
   - {fileID: 496204139}
   - {fileID: 1027825102}
   - {fileID: 1026169849}

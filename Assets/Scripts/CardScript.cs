@@ -2,19 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardScript : MonoBehaviour
-{
-    public int[] possibleMoves;
+public class CardScript : MonoBehaviour {
+	public int[] possibleMovesX, possibleMovesY;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [Header("Tamanho da grid")]
-    public int vertical, horizontal, currentTile;
-    public GameObject[] Casas;
+	public float tempoAnimacao;
+
+	[HideInInspector] public int[] currentTile;
+
+	public GameObject[] Linha1;
+	public GameObject[] Linha2;
+	public GameObject[] Linha3;
+	public GameObject[] Linha4;
+	public GameObject[] Linha5;
+	private GameObject[,] Casas;
+
     public GameObject player1, player2;
     public CardScript selectedcard;
 
@@ -21,38 +29,55 @@ public class GameController : MonoBehaviour
 
     public TurnState turnState;
 
-    // Update is called once per frame
-    void Update()
+	private void Start() {
+
+		Casas = new GameObject[5, 5];
+		currentTile = new int[2];
+
+		for (int i = 0; i < 5; i++ ) {
+			Casas[0, i] = Linha1[i];
+			Casas[1, i] = Linha2[i];
+			Casas[2, i] = Linha3[i];
+			Casas[3, i] = Linha4[i];
+			Casas[4, i] = Linha5[i];
+		}
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         TurnHandler();
         //Debug.Log(turnState);
     }
 
-    private void MoverPeca(GameObject peca, int casa){
-        peca.transform.DOMove(new Vector3(peca.transform.position.x, peca.transform.position.y+1, peca.transform.position.z),1).OnComplete(()=> {
-            peca.transform.DOMove(new Vector3(Casas[casa].transform.position.x, peca.transform.position.y, Casas[casa].transform.position.z),1).OnComplete(() => {
-                peca.transform.DOMove(new Vector3(peca.transform.position.x, 0.448f, peca.transform.position.z), 1).OnComplete(() => {
-                    Debug.Log("Rodaaroda");
+	private void MoverPeca(GameObject peca, GameObject casa){
+
+		Vector3 acimaDoTileAntigo = new Vector3(peca.transform.position.x, peca.transform.position.y + 1, peca.transform.position.z);
+		Vector3 acimaDoNovoTile = new Vector3(casa.transform.position.x, peca.transform.position.y + 1, casa.transform.position.z);
+		Vector3 posicaoFinal = new Vector3(casa.transform.position.x, peca.transform.position.y, casa.transform.position.z);
+
+		peca.transform.DOMove(acimaDoTileAntigo, tempoAnimacao / 3).OnComplete(()=> {
+			peca.transform.DOMove(acimaDoNovoTile, tempoAnimacao / 3).OnComplete(() => {
+				peca.transform.DOMove(posicaoFinal, tempoAnimacao / 3).OnComplete(() => {
                     activeTurn = false;
                 });
             });
         });
     }
 
-    private int GetSelectedTile() {
+	private GameObject GetSelectedTile() {
         LayerMask mask = LayerMask.GetMask("Tabuleiro");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
-            Debug.Log("Click Detected");
             StartCoroutine(Changetilecolor(hit.collider.gameObject));
-            for(int i = 0; i<Casas.Length; i++ ){
-                if (hit.collider.gameObject == Casas[i]) {
-                    return i;
-                }
-            }            
+
+            for(int i = 0; i<5; i++ )
+				for (int j = 0; j < 5; j++ ) 
+	                if (hit.collider.gameObject == Casas[i,j]) 
+	                    return Casas[i,j];
         }
-        return 0;
+		return null;
     }
 
     private bool CheckSelectedTile()
@@ -60,17 +85,15 @@ public class GameController : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("Tabuleiro");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
-        {
-            Debug.Log("Click Detected");
-            
-            for (int i = 0; i < Casas.Length; i++)
-            {
-                if (hit.collider.gameObject == Casas[i] && hit.collider.gameObject.GetComponent<TileCheck>().canMove == true)
-                {
-                    return true;
-                }
-            }
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)){
+			GameObject hcgo = hit.collider.gameObject;
+			bool canMove = hcgo.GetComponent<TileCheck>().canMove;
+
+			if ( canMove ) 
+				for (int i = 0; i < 5 ; i++)
+					for (int j = 0; j < 5; j++ ) 
+	                	if ( hcgo == Casas[i,j])
+	                	    return true;
         }
         return false;
     }
@@ -85,47 +108,25 @@ public class GameController : MonoBehaviour
     public int topDifference;
 
     private void HighlightMoveOptions(CardScript card) {
-        
+		int[] pmX = card.possibleMovesX;
+		int[] pmY = card.possibleMovesY;
+		int cX = currentTile[0];
+		int cY = currentTile[1];
 
-        for (int i = 0; i <= 5; i++)
-        {
-            if ((currentTile + i) % 5 == 0)
-            {
-                downDifference = -5 + i;
-                topDifference = i;
-            }
-        }
+		for (int i = 0; i < pmX.Length; i++ ) {
+			int candidatoX = cX + pmX[i];
+			int candidatoY = cY + pmY[i];
 
-        for (int i = 0; i < card.possibleMoves.Length; i++){
+			if ( candidatoX >=0 && candidatoX<5 && candidatoY>=0 && candidatoY<5 ){
+				GameObject c = Casas[candidatoX, candidatoY];
+	            c.GetComponent<Renderer>().material.color = Color.green;
+	            c.GetComponent<TileCheck>().canMove = true;
+			}
 
-            Debug.Log(currentTile + card.possibleMoves[i]);
-            if (currentTile + card.possibleMoves[i] >= 0 && currentTile + card.possibleMoves[i] <= 24) {
+		}
+	}
 
-                if (currentTile + card.possibleMoves[i] < Casas.Length && card.possibleMoves[i] >= topDifference)
-                {
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<Renderer>().material.color = Color.green;
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<TileCheck>().canMove = true;
-                }
-                else if (currentTile + card.possibleMoves[i] >= 0 && card.possibleMoves[i] < downDifference)
-                {
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<Renderer>().material.color = Color.green;
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<TileCheck>().canMove = true;
-                }
-                else if ((currentTile + 1) % 5 != 0 && card.possibleMoves[i] > 0 && card.possibleMoves[i] < topDifference)
-                {
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<Renderer>().material.color = Color.green;
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<TileCheck>().canMove = true;
-                }
-                else if (currentTile % 5 != 0 && card.possibleMoves[i] < 0 && card.possibleMoves[i] > downDifference)
-                {
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<Renderer>().material.color = Color.green;
-                    Casas[currentTile + card.possibleMoves[i]].GetComponent<TileCheck>().canMove = true;
-                }
-            }
-        }
-    }
-
-    GameObject currentPlayer;
+	GameObject currentPlayer;
     GameObject currentPiece;
     bool activeTurn = true;
 
@@ -161,18 +162,18 @@ public class GameController : MonoBehaviour
                     currentPiece = currentPlayer;
                     LayerMask mask = LayerMask.GetMask("Tabuleiro");
                     RaycastHit hit;
-                    if (Physics.Raycast(currentPiece.transform.position,new Vector3(0, -1, 0), out hit, mask))
-                    {
-                        for (int i = 0; i < Casas.Length; i++)
-                        {
-                            if (hit.collider.gameObject == Casas[i])
-                            {
-                                currentTile = i;
-                            }
-                        }
-                        
+                    if (Physics.Raycast(currentPiece.transform.position,new Vector3(0, -1, 0), out hit, mask)){
+						GameObject hcgo = hit.collider.gameObject;
+											 
+						for (int i = 0; i < 5; i++)
+							for (int j = 0; j < 5; j++ ) 
+								if (hcgo== Casas[i,j]){
+									currentTile[0] = i;
+									currentTile[1] = j;
+								}
                     }
-
+					// XXX
+					// IF p1, highlight na selectedcard do player 1, ELSE highlight na selectedcard do player 2
                     HighlightMoveOptions(selectedcard);
 
                     turnState = TurnState.TileSelect;
@@ -207,11 +208,11 @@ public class GameController : MonoBehaviour
 
     private void ClearBoard()
     {
-        for (int i = 0; i < Casas.Length; i++)
-        {
-            Casas[i].GetComponent<TileCheck>().canMove = false;
-            Casas[i].GetComponent<Renderer>().material.color = Color.white;
-        }
+        for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 5; j++ ) {
+				Casas[i,j].GetComponent<TileCheck>().canMove = false;
+				Casas[i,j].GetComponent<Renderer>().material.color = Color.white;
+			}        
     }
 
 
