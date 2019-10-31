@@ -113,9 +113,12 @@ public class GameController : MonoBehaviour
 		int cX = currentTile[0];
 		int cY = currentTile[1];
 
+		int sinal = TurnIndicator.indicator.blueTurn ? 1 : -1;
+		// XXX
+		// AVALIAR SE O SINAL TÁ MUDANDO A CADA TURNO 
 		for (int i = 0; i < pmX.Length; i++ ) {
-			int candidatoX = cX + pmX[i];
-			int candidatoY = cY + pmY[i];
+			int candidatoX = cX + sinal * pmX[i];
+			int candidatoY = cY + sinal * pmY[i];
 
 			if ( candidatoX >=0 && candidatoX<5 && candidatoY>=0 && candidatoY<5 ){
 				GameObject c = Casas[candidatoX, candidatoY];

@@ -12,8 +12,14 @@ public class TurnIndicator : MonoBehaviour
     public GameObject turnID3;
     public GameObject turnID4;
 
-    // Start is called before the first frame update
-    void Start()
+	public static TurnIndicator indicator;
+
+	private void Awake() {
+		indicator = this;
+	}
+
+
+	void Start()
     {
         blueTurn = true;
         GetComponent<Renderer>().material.color = Color.blue;                 
@@ -43,18 +49,15 @@ public class TurnIndicator : MonoBehaviour
 
     public void TurnChange()
     {
-        Debug.Log(blueTurn);
         if (blueTurn == true)
         {
             animator.SetInteger("TurnChange", 1);
             blueTurn = false;
-            GetComponent<Renderer>().material.color = Color.red;
         }
         else
         {
             animator.SetInteger("TurnChange", 2);
             blueTurn = true;
-            GetComponent<Renderer>().material.color = Color.blue; ;
         }
     }
 }
