@@ -21,8 +21,7 @@ public class TurnIndicator : MonoBehaviour
 
 	void Start()
     {
-        blueTurn = true;
-        GetComponent<Renderer>().material.color = Color.blue;                 
+        blueTurn = true;                 
     }
 
     void Update()

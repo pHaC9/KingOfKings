@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class GameController : MonoBehaviour
 
     public TurnState turnState;
 
+
+
+
 	private void Start() {
 
 		Casas = new GameObject[5, 5];
@@ -43,12 +47,23 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
+
+
+    
 	void Update()
     {
+        //APENAS PARA TESTES - RESETAR A CENA
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         TurnHandler();
         //Debug.Log(turnState);
     }
+
+
+
 
 	private void MoverPeca(GameObject peca, GameObject casa){
 
@@ -65,6 +80,9 @@ public class GameController : MonoBehaviour
         });
     }
 
+
+
+
 	private GameObject GetSelectedTile() {
         LayerMask mask = LayerMask.GetMask("Tabuleiro");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -79,6 +97,9 @@ public class GameController : MonoBehaviour
         }
 		return null;
     }
+
+
+
 
     private bool CheckSelectedTile()
     {
@@ -98,14 +119,16 @@ public class GameController : MonoBehaviour
         return false;
     }
 
+
+
+
     IEnumerator Changetilecolor(GameObject tile) {
         tile.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
         tile.GetComponent<Renderer>().material.color = Color.white;
     }
+    
 
-    public int downDifference;
-    public int topDifference;
 
     private void HighlightMoveOptions(CardScript card) {
 		int[] pmX = card.possibleMovesX;
@@ -129,14 +152,21 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+
+
 	GameObject currentPlayer;
     GameObject currentPiece;
     bool activeTurn = true;
+
+
 
     private void TurnHandler() {
         
         switch (turnState)
         {
+
+
+
             case TurnState.BeginTurn:                
 
                 if (FindObjectOfType<TurnIndicator>().GetComponent<TurnIndicator>().blueTurn == true)
@@ -150,6 +180,9 @@ public class GameController : MonoBehaviour
                 turnState = TurnState.CardSelect;
                 break;
 
+
+
+
             case TurnState.CardSelect:                
 
                 if (Input.GetKeyDown(KeyCode.Z))
@@ -158,6 +191,9 @@ public class GameController : MonoBehaviour
                 }
                 break;
 
+
+
+                
             case TurnState.PieceSelect:                
 
                 if (Input.GetKeyDown(KeyCode.X))
@@ -184,6 +220,9 @@ public class GameController : MonoBehaviour
                 
                 break;
 
+
+
+
             case TurnState.TileSelect:                
 
                 if (Input.GetMouseButton(0) && CheckSelectedTile() == true)
@@ -193,6 +232,9 @@ public class GameController : MonoBehaviour
                 }
                 
                 break;
+
+
+
 
             case TurnState.EndTurn:                
 
@@ -205,9 +247,13 @@ public class GameController : MonoBehaviour
                 }
 
                 break;
+
         }        
 
     }
+
+
+
 
     private void ClearBoard()
     {
@@ -217,6 +263,4 @@ public class GameController : MonoBehaviour
 				Casas[i,j].GetComponent<Renderer>().material.color = Color.white;
 			}        
     }
-
-
 }
