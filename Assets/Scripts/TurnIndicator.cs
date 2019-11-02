@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnIndicator : MonoBehaviour
 {    
     public bool blueTurn;
     public GameObject cameraPivot;
     public Animator animator;
-    public GameObject turnID1;
-    public GameObject turnID2;
-    public GameObject turnID3;
-    public GameObject turnID4;
+    public Image turnID;
+    public GameObject TurnText;
 
 	public static TurnIndicator indicator;
 
@@ -28,18 +28,15 @@ public class TurnIndicator : MonoBehaviour
     {
         if (blueTurn == true)
         {
-            turnID1.GetComponent<Renderer>().material.color = Color.blue;
-            turnID2.GetComponent<Renderer>().material.color = Color.blue;
-            turnID3.GetComponent<Renderer>().material.color = Color.blue;
-            turnID4.GetComponent<Renderer>().material.color = Color.blue;
-
+            turnID.GetComponent<Image>().color = Color.blue;            
+            TurnText.GetComponent<TextMeshProUGUI>().text = "PLAYER 1'S TURN";
+            TurnText.GetComponent<TextMeshProUGUI>().color = Color.blue;
         }
         else
         {
-            turnID1.GetComponent<Renderer>().material.color = Color.red;
-            turnID2.GetComponent<Renderer>().material.color = Color.red;
-            turnID3.GetComponent<Renderer>().material.color = Color.red;
-            turnID4.GetComponent<Renderer>().material.color = Color.red;
+            turnID.GetComponent<Image>().color = Color.red;
+            TurnText.GetComponent<TextMeshProUGUI>().text = "PLAYER 2'S TURN";
+            TurnText.GetComponent<TextMeshProUGUI>().color = Color.red;
         }
         
         

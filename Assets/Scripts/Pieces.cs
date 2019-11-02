@@ -8,14 +8,14 @@ public class Pieces : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        
-        if (turnID.GetComponent<TurnIndicator>().blueTurn == true && collider.tag == "Player2")
-        {
-            Debug.Log("Collision with Player2");
 
-            Destroy(gameObject);
-        }       
-        
+        //if (turnID.GetComponent<TurnIndicator>().blueTurn == true && collider.tag == "Player2")
+        //{
+        //    Debug.Log("Collision with Player2");
+
+        //    Destroy(gameObject);
+        //}
+
     }
 
 }
