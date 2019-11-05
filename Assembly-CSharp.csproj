@@ -70,8 +70,10 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Scripts\ButtonScript.cs" />
     <Compile Include="Assets\Scripts\CardScript.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\MenuCameraRotator.cs" />
     <Compile Include="Assets\Scripts\Pieces.cs" />
     <Compile Include="Assets\Scripts\TileCheck.cs" />
     <Compile Include="Assets\Scripts\TurnIndicator.cs" />

@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-	public float tempoAnimacao;
+    public AudioSource audioSource;
+    public AudioClip[] sound;
+            
+
+    public float tempoAnimacao;
 
 	[HideInInspector] public int[] currentTile;
 
@@ -59,6 +63,39 @@ public class GameController : MonoBehaviour
         }
 
         TurnHandler();
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            audioSource.PlayOneShot(sound[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            audioSource.PlayOneShot(sound[1]);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            audioSource.PlayOneShot(sound[2]);
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            audioSource.PlayOneShot(sound[3]);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            audioSource.PlayOneShot(sound[4]);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            audioSource.PlayOneShot(sound[5]);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            audioSource.PlayOneShot(sound[6]);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            audioSource.PlayOneShot(sound[7]);
+        }
         //Debug.Log(turnState);
     }
 

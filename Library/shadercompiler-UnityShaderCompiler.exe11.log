@@ -1,10 +1,61 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=33598 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=73693 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=15259 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=47631 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=50048 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15806 outsize=67391 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=26390 outsize=324 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=13984 outsize=2204 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=22088 outsize=14529 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7702 outsize=8265 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6057 outsize=9178 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=22288 outsize=21741 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=8884 outsize=4069 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3111 outsize=3237 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=8163 outsize=695 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=21149 outsize=95091 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=37247 outsize=31493 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=37247 outsize=33663 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=17989 outsize=7333 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9203 outsize=4969 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3133 outsize=2756 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=10127 outsize=3581 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3382 outsize=4635 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7903 outsize=3364 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=4037 outsize=662 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=18083 outsize=638 ok=1
+Cmd: initializeCompiler
 Cmd: compileSnippet
-  error: 1 plat 4 at (98): 'TransformObjectToWorld': implicit truncation of vector type\nCompiling Fragment program
-Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR
-  api=4 type=1 insize=4397 outsize=814 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+  api=4 type=1 insize=11538 outsize=1466 kw=FINALPASS pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=12810 outsize=2930 kw=_MAIN_LIGHT_SHADOWS pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-
-Quitting shader compiler process
+  api=4 type=1 insize=3912 outsize=11602 kw=FXAA pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11538 outsize=6050 kw=CHROMATIC_ABERRATION BLOOM VIGNETTE FINALPASS COLOR_GRADING_LDR_2D pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
