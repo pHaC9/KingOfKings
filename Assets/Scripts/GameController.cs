@@ -21,8 +21,13 @@ public class GameController : MonoBehaviour
 	public GameObject[] Linha5;
 	private GameObject[,] Casas;
 
+	public Material DefaultMat;
+	public Material HighlightMat;
+	public Material ClickedMat;
+
     public GameObject player1, player2;
     public CardScript selectedcard;
+    public bool gamepaused;
 
     public enum TurnState{
         BeginTurn,
@@ -56,14 +61,21 @@ public class GameController : MonoBehaviour
     
 	void Update()
     {
+        TurnHandler();
+
+
+        //APENAS PARA TESTES - RESETAR A CENA
         //APENAS PARA TESTES - RESETAR A CENA
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        //APENAS PARA TESTES - RESETAR A CENA
+        //APENAS PARA TESTES - RESETAR A CENA
 
-        TurnHandler();
 
+        //APENAS PARA TESTES - TESTE DE ÁUDIO
+        //APENAS PARA TESTES - TESTE DE ÁUDIO
         if (Input.GetKeyDown(KeyCode.A))
         {
             audioSource.PlayOneShot(sound[0]);
@@ -96,13 +108,38 @@ public class GameController : MonoBehaviour
         {
             audioSource.PlayOneShot(sound[7]);
         }
+        //APENAS PARA TESTES - TESTE DE ÁUDIO
+        //APENAS PARA TESTES - TESTE DE ÁUDIO
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PauseHandler();
+        }
+        
         //Debug.Log(turnState);
+    }
+    
+
+
+
+    private void PauseHandler()
+    {
+        if (!gamepaused)
+        {
+            Time.timeScale = 0;
+            gamepaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            gamepaused = false;
+        }
     }
 
 
 
 
-	private void MoverPeca(GameObject peca, GameObject casa){
+    private void MoverPeca(GameObject peca, GameObject casa){
 
 		Vector3 acimaDoTileAntigo = new Vector3(peca.transform.position.x, peca.transform.position.y + 1, peca.transform.position.z);
 		Vector3 acimaDoNovoTile = new Vector3(casa.transform.position.x, peca.transform.position.y + 1, casa.transform.position.z);
@@ -160,11 +197,12 @@ public class GameController : MonoBehaviour
 
 
     IEnumerator Changetilecolor(GameObject tile) {
-        tile.GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.25f);
-        tile.GetComponent<Renderer>().material.color = Color.white;
+        tile.GetComponent<Renderer>().material = ClickedMat;
+        yield return new WaitForSeconds(1f);
+        //tile.GetComponent<Renderer>().material = DefaultMat;
     }
     
+
 
 
     private void HighlightMoveOptions(CardScript card) {
@@ -182,12 +220,13 @@ public class GameController : MonoBehaviour
 
 			if ( candidatoX >=0 && candidatoX<5 && candidatoY>=0 && candidatoY<5 ){
 				GameObject c = Casas[candidatoX, candidatoY];
-	            c.GetComponent<Renderer>().material.color = Color.green;
+	            c.GetComponent<Renderer>().material = HighlightMat;
 	            c.GetComponent<TileCheck>().canMove = true;
 			}
 
 		}
 	}
+
 
 
 
@@ -197,13 +236,12 @@ public class GameController : MonoBehaviour
 
 
 
+
     private void TurnHandler() {
         
         switch (turnState)
         {
-
-
-
+            
             case TurnState.BeginTurn:                
 
                 if (FindObjectOfType<TurnIndicator>().GetComponent<TurnIndicator>().blueTurn == true)
@@ -214,12 +252,12 @@ public class GameController : MonoBehaviour
                 {
                     currentPlayer = player2;
                 }
-                turnState = TurnState.CardSelect;
+                turnState = TurnState.PieceSelect;
                 break;
 
 
 
-
+                /*
             case TurnState.CardSelect:                
 
                 if (Input.GetKeyDown(KeyCode.Z))
@@ -227,14 +265,14 @@ public class GameController : MonoBehaviour
                     turnState = TurnState.PieceSelect;
                 }
                 break;
-
+                */
 
 
                 
             case TurnState.PieceSelect:                
 
-                if (Input.GetKeyDown(KeyCode.X))
-                {                    
+                //if (Input.GetKeyDown(KeyCode.X))
+               // {                    
                     currentPiece = currentPlayer;
                     LayerMask mask = LayerMask.GetMask("Tabuleiro");
                     RaycastHit hit;
@@ -253,7 +291,7 @@ public class GameController : MonoBehaviour
                     HighlightMoveOptions(selectedcard);
 
                     turnState = TurnState.TileSelect;
-                }
+               // }
                 
                 break;
 
@@ -297,7 +335,9 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 5; j++ ) {
 				Casas[i,j].GetComponent<TileCheck>().canMove = false;
-				Casas[i,j].GetComponent<Renderer>().material.color = Color.white;
-			}        
+                //Casas[i, j].GetComponent<Renderer>().material.color = Color.white;
+                Casas[i, j].GetComponent<Renderer>().material = DefaultMat;
+
+            }
     }
 }
