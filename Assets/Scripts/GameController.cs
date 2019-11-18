@@ -25,6 +25,16 @@ public class GameController : MonoBehaviour
 	public Material HighlightMat;
 	public Material ClickedMat;
 
+    public Material P1DefaultMat;
+	public Material P2DefaultMat;
+
+    public Material FresnelMatP1;
+	public Material FresnelMatP1Clicked;
+	public Material FresnelMatP2;
+	public Material FresnelMatP2Clicked;
+
+    //FresnelMatP1Clicked
+
     public GameObject player1, player2;
     public CardScript selectedcard;
     public bool gamepaused;
@@ -276,7 +286,7 @@ public class GameController : MonoBehaviour
                     currentPiece = currentPlayer;
                     LayerMask mask = LayerMask.GetMask("Tabuleiro");
                     RaycastHit hit;
-                    if (Physics.Raycast(currentPiece.transform.position,new Vector3(0, -1, 0), out hit, mask)){
+                    if (Physics.Raycast(currentPiece.transform.position, new Vector3(0, -1, 0), out hit, mask)){
 						GameObject hcgo = hit.collider.gameObject;
 											 
 						for (int i = 0; i < 5; i++)
